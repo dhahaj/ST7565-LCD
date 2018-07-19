@@ -134,8 +134,6 @@ uint8_t st7565_buffer[1024] = {
 static uint8_t xUpdateMin, xUpdateMax, yUpdateMin, yUpdateMax;
 #endif
 
-
-
 static void updateBoundingBox(uint8_t xmin, uint8_t ymin, uint8_t xmax, uint8_t ymax) {
 #ifdef enablePartialUpdate
   if (xmin < xUpdateMin) xUpdateMin = xmin;
@@ -145,9 +143,7 @@ static void updateBoundingBox(uint8_t xmin, uint8_t ymin, uint8_t xmax, uint8_t 
 #endif
 }
 
-void ST7565::drawbitmap(uint8_t x, uint8_t y, 
-			const uint8_t *bitmap, uint8_t w, uint8_t h,
-			uint8_t color) {
+void ST7565::drawbitmap(uint8_t x, uint8_t y, const uint8_t *bitmap, uint8_t w, uint8_t h, uint8_t color) {
   for (uint8_t j=0; j<h; j++) {
     for (uint8_t i=0; i<w; i++ ) {
       if (pgm_read_byte(bitmap + i + (j/8)*w) & _BV(j%8)) {
@@ -172,7 +168,6 @@ void ST7565::drawstring(uint8_t x, uint8_t line, char *c) {
       return;        // ran out of space :(
   }
 }
-
 
 void ST7565::drawstring_P(uint8_t x, uint8_t line, const char *str) {
   while (1) {
@@ -199,10 +194,8 @@ void  ST7565::drawchar(uint8_t x, uint8_t line, char c) {
   updateBoundingBox(x, line*8, x+5, line*8 + 8);
 }
 
-
 // bresenham's algorithm - thx wikpedia
-void ST7565::drawline(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, 
-		      uint8_t color) {
+void ST7565::drawline(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, uint8_t color) {
   uint8_t steep = abs(y1 - y0) > abs(x1 - x0);
   if (steep) {
     swap(x0, y0);
@@ -244,8 +237,7 @@ void ST7565::drawline(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1,
 }
 
 // filled rectangle
-void ST7565::fillrect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, 
-		      uint8_t color) {
+void ST7565::fillrect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint8_t color) {
 
   // stupidest version - just pixels - but fast with internal buffer!
   for (uint8_t i=x; i<x+w; i++) {
@@ -258,8 +250,7 @@ void ST7565::fillrect(uint8_t x, uint8_t y, uint8_t w, uint8_t h,
 }
 
 // draw a rectangle
-void ST7565::drawrect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, 
-		      uint8_t color) {
+void ST7565::drawrect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint8_t color) {
   // stupidest version - just pixels - but fast with internal buffer!
   for (uint8_t i=x; i<x+w; i++) {
     my_setpixel(i, y, color);
@@ -274,8 +265,7 @@ void ST7565::drawrect(uint8_t x, uint8_t y, uint8_t w, uint8_t h,
 }
 
 // draw a circle outline
-void ST7565::drawcircle(uint8_t x0, uint8_t y0, uint8_t r, 
-			uint8_t color) {
+void ST7565::drawcircle(uint8_t x0, uint8_t y0, uint8_t r, uint8_t color) {
   updateBoundingBox(x0-r, y0-r, x0+r, y0+r);
 
   int8_t f = 1 - r;
@@ -315,8 +305,7 @@ void ST7565::drawcircle(uint8_t x0, uint8_t y0, uint8_t r,
 
 }
 
-void ST7565::fillcircle(uint8_t x0, uint8_t y0, uint8_t r, 
-			uint8_t color) {
+void ST7565::fillcircle(uint8_t x0, uint8_t y0, uint8_t r, uint8_t color) {
   updateBoundingBox(x0-r, y0-r, x0+r, y0+r);
 
   int8_t f = 1 - r;
@@ -374,7 +363,6 @@ void ST7565::setpixel(uint8_t x, uint8_t y, uint8_t color) {
 
   updateBoundingBox(x,y,x,y);
 }
-
 
 // the most basic function, get a single pixel
 uint8_t ST7565::getpixel(uint8_t x, uint8_t y) {
@@ -535,6 +523,7 @@ inline void ST7565::spiwrite(uint8_t c) {
 */
 
 }
+
 void ST7565::st7565_command(uint8_t c) {
   digitalWrite(a0, LOW);
 
@@ -546,11 +535,11 @@ void ST7565::st7565_data(uint8_t c) {
 
   spiwrite(c);
 }
+
 void ST7565::st7565_set_brightness(uint8_t val) {
     st7565_command(CMD_SET_VOLUME_FIRST);
     st7565_command(CMD_SET_VOLUME_SECOND | (val & 0x3f));
 }
-
 
 void ST7565::display(void) {
   uint8_t col, maxcol, p;
@@ -614,7 +603,6 @@ void ST7565::clear(void) {
   memset(st7565_buffer, 0, 1024);
   updateBoundingBox(0, 0, LCDWIDTH-1, LCDHEIGHT-1);
 }
-
 
 // this doesnt touch the buffer, just clears the display RAM - might be handy
 void ST7565::clear_display(void) {

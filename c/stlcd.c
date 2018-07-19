@@ -5,20 +5,6 @@ ST7565 LCD library!
 
 Copyright (C) 2010 Limor Fried, Adafruit Industries
 
-This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
-version 2.1 of the License, or (at your option) any later version.
-
-This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-
  // some of this code was written by <cstone@pobox.com> originally; it is in the public domain.
 */
 
@@ -29,7 +15,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 #include "glcd.h"
 #include "util.h"
 #include "icon.h"
-
 
 #define BLA_DDR DDRB
 #define BLA_PIN PINB
@@ -289,7 +274,6 @@ void testdrawrect(uint8_t *buff) {
   }
 }
 
-
 void testfillrect(uint8_t *buff) {
   for (uint8_t i=0; i<64; i++) {
     fillrect(buff, i, i, 128-i, 64-i, i%2);
@@ -317,7 +301,6 @@ void clear_screen(void) {
     }     
   }
 }
-
 
 void st7565_init(void) {
   // set pin directions
@@ -439,6 +422,7 @@ inline void spiwrite(uint8_t c) {
 */
 
 }
+
 void st7565_command(uint8_t c) {
   A0_PORT &= ~_BV(A0);
 
@@ -450,11 +434,11 @@ void st7565_data(uint8_t c) {
 
   spiwrite(c);
 }
+
 void st7565_set_brightness(uint8_t val) {
     st7565_command(CMD_SET_VOLUME_FIRST);
     st7565_command(CMD_SET_VOLUME_SECOND | (val & 0x3f));
 }
-
 
 void write_buffer(uint8_t *buffer) {
   uint8_t c, p;

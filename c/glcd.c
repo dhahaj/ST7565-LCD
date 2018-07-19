@@ -4,20 +4,6 @@ $Id:$
 ST7565 LCD library!
 
 Copyright (C) 2010 Limor Fried, Adafruit Industries
-
-This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
-version 2.1 of the License, or (at your option) any later version.
-
-This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include <avr/io.h>
@@ -49,8 +35,6 @@ void drawbitmap(uint8_t *buff, uint8_t x, uint8_t y,
       }
     }
   }
-
-
 }
 
 void drawstring(uint8_t *buff, uint8_t x, uint8_t line, uint8_t *c) {
@@ -66,7 +50,6 @@ void drawstring(uint8_t *buff, uint8_t x, uint8_t line, uint8_t *c) {
     if (line >= (LCDHEIGHT/8))
       return;        // ran out of space :(
   }
-
 }
 
 void drawchar(uint8_t *buff, uint8_t x, uint8_t line, uint8_t c) {

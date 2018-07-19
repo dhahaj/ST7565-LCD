@@ -27,14 +27,14 @@
 #define CMD_SET_POWER_CONTROL  0x28
 #define CMD_SET_RESISTOR_RATIO  0x20
 #define CMD_SET_VOLUME_FIRST  0x81
-#define  CMD_SET_VOLUME_SECOND  0
+#define CMD_SET_VOLUME_SECOND  0
 #define CMD_SET_STATIC_OFF  0xAC
-#define  CMD_SET_STATIC_ON  0xAD
+#define CMD_SET_STATIC_ON  0xAD
 #define CMD_SET_STATIC_REG  0x0
 #define CMD_SET_BOOSTER_FIRST  0xF8
 #define CMD_SET_BOOSTER_234  0
-#define  CMD_SET_BOOSTER_5  1
-#define  CMD_SET_BOOSTER_6  3
+#define CMD_SET_BOOSTER_5  1
+#define CMD_SET_BOOSTER_6  3
 #define CMD_NOP  0xE3
 #define CMD_TEST  0xF0
 
@@ -47,7 +47,6 @@ void st7565_init(void);
 void st7565_command(uint8_t c);
 void st7565_data(uint8_t c);
 void st7565_set_brightness(uint8_t val);
-
 
 void clear_screen(void);
 void clear_buffer(uint8_t *buffer);

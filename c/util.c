@@ -70,7 +70,6 @@ void uart_puts(const char* str)
     uart_putc(*str++);
 }
 
-
 void uart_putc_hex(uint8_t b)
 {
   /* upper nibble */
